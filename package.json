@@ -1,0 +1,26 @@
+{
+  "name": "caret",
+  "version": "1.0.0",
+  "description": "AI agent framework plugin for VSCode plugin (free Cursor)",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/fstory97/caret.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fstory97/caret/issues"
+  },
+  "homepage": "https://github.com/fstory97/caret#readme",
+  "dependencies": {
+    "chokidar": "^4.0.3"
+  }
+}
