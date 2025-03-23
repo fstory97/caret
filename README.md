@@ -82,7 +82,7 @@ npm run dev
 - [프로젝트 개요](docs/project-overview.md)
 - [새 개발자 가이드](docs/new-developer-guide.md)
 - [사용 가이드](docs/user-guide.md) (준비중)
-- [볼드모트 분석 문서](docs/references/voldemort/) (개발 참고 자료)
+- [볼드모트 분석 문서](docs/references/voldemort/getting_started.md) (개발 참고 자료)
 
 ## 🌿 개발 원칙
 
