@@ -115,6 +115,41 @@
                     "format": "v[주버전].[부버전].[패치]",
                     "when_to_tag": "중요 기능 완성 또는 버그 수정 후"
                 }
+            },
+            "commit_completion_process": {
+                "triggers": [
+                    "업무 끝났다",
+                    "오늘 커밋 치고 끝내자",
+                    "커밋하고 마무리하자"
+                ],
+                "steps": [
+                    "모든 변경사항 'git add .' 명령으로 추가 (민감한 파일에 대한 보안 경고 표시)",
+                    "일일 작업 로그 분석하여 커밋 메시지 생성",
+                    "초안 커밋 메시지 검토 요청",
+                    "승인 시 'git commit' 명령으로 커밋 실행",
+                    "명령 시 'git push'로 원격 저장소에 푸시"
+                ],
+                "commit_message_format": {
+                    "title": "[타입]: 태스크 #[태스크번호] [설명]",
+                    "body_format": {
+                        "per_task_section": "[타입]: [설명] (#[태스크번호])",
+                        "file_changes": [
+                            "- A: [추가된/파일/경로.확장자] (추가된 파일)",
+                            "- U: [수정된/파일/경로.확장자] (수정된 파일)", 
+                            "- D: [삭제된/파일/경로.확장자] (삭제된 파일)"
+                        ]
+                    },
+                    "examples": [
+                        "docs: 태스크 #003 오픈소스 프로젝트 문서 작성 완료",
+                        "feat: 모드 전환 컨텍스트 관리 규칙 추가 (#001)\n- A: agents-rules/alpha/project-rules.json\n- U: docs/work-logs/luke-and-alpha/2025-03-23.md"
+                    ]
+                },
+                "security_warnings": [
+                    "환경 설정 파일 (.env, config.json)",
+                    "개인 정보 포함 파일",
+                    "비밀번호나 API 키 포함 파일",
+                    "대용량 바이너리 파일"
+                ]
             }
         },
         "development_strategy": {

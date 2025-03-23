@@ -115,6 +115,41 @@
                     "format": "v[major].[minor].[patch]",
                     "when_to_tag": "After significant feature completion or bug fixes"
                 }
+            },
+            "commit_completion_process": {
+                "triggers": [
+                    "업무 끝났다",
+                    "오늘 커밋 치고 끝내자",
+                    "커밋하고 마무리하자"
+                ],
+                "steps": [
+                    "Add all changes with 'git add .' (with security warning for sensitive files)",
+                    "Analyze daily work log to generate commit message",
+                    "Present draft commit message for review",
+                    "Commit upon approval with 'git commit' command",
+                    "Push to remote with 'git push' upon command"
+                ],
+                "commit_message_format": {
+                    "title": "[type]: 태스크 #[task-number] [description]",
+                    "body_format": {
+                        "per_task_section": "[type]: [description] (#[task-number])",
+                        "file_changes": [
+                            "- A: [path/to/added/file.ext] (Added files)",
+                            "- U: [path/to/updated/file.ext] (Updated files)", 
+                            "- D: [path/to/deleted/file.ext] (Deleted files)"
+                        ]
+                    },
+                    "examples": [
+                        "docs: 태스크 #003 오픈소스 프로젝트 문서 작성 완료",
+                        "feat: 모드 전환 컨텍스트 관리 규칙 추가 (#001)\n- A: agents-rules/alpha/project-rules.json\n- U: docs/work-logs/luke-and-alpha/2025-03-23.md"
+                    ]
+                },
+                "security_warnings": [
+                    "환경 설정 파일 (.env, config.json)",
+                    "개인 정보 포함 파일",
+                    "비밀번호나 API 키 포함 파일",
+                    "대용량 바이너리 파일"
+                ]
             }
         },
         "development_strategy": {
