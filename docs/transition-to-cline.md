@@ -71,7 +71,7 @@
 
 ### 4.2 기술적 접근 방법
 1. **시스템 프롬프트 확장**
-   - Cline의 [`src/core/prompts/system.ts`](https://github.com/cline/cline/blob/main/src/core/prompts/system.ts) 파일을 중심으로 개선
+   - Cline의 [`src/core/prompts/system.ts`](https://github.com/cline/cline/blob/main/blob/main/src/core/prompts/system.ts) 파일을 중심으로 개선
    - 조건부 프롬프트 추가로 모드별 동작 구현
    - 한국어 최적화 섹션 추가
 

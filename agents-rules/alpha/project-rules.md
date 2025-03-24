@@ -596,7 +596,7 @@ agents-rules/alpha/           # 알파의 규칙 파일 디렉토리
         "code_references": {
             "format": "링크된 절대 경로와 행 번호",
             "pattern": "[`/경로/파일.확장자:행-범위`](/경로/파일.확장자)",
-            "example": "[`https://github.com/cline/cline/src/core/Cline.ts:10-15`](https://github.com/cline/cline/src/core/Cline.ts)",
+            "example": "[`https://github.com/cline/cline/blob/main/src/core/Cline.ts:10-15`](https://github.com/cline/cline/blob/main/src/core/Cline.ts)",
             "reason": "코드 참조를 정보성과 클릭 가능성을 모두 갖추도록 함"
         },
         "section_references": {
