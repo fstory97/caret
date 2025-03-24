@@ -457,6 +457,98 @@
                 "효율성 개선 도출",
                 "새로운 기능 제안"
             ]
+        },
+        "documentation_rules": {
+            "file_references": {
+                "markdown_links": {
+                    "internal_files": {
+                        "format": "[링크텍스트](상대/경로/파일.확장자)",
+                        "example": "[설치 가이드](../docs/installation.md)",
+                        "description": "문서 위치 기준 상대 경로 사용"
+                    },
+                    "web_links": {
+                        "format": "[링크텍스트](https://전체URL)",
+                        "example": "[GitHub](https://github.com/username/repo)",
+                        "description": "전체 URL 사용"
+                    }
+                },
+                "path_conventions": {
+                    "absolute_path": {
+                        "description": "시스템 루트부터 시작하는 경로",
+                        "example": "/d:/dev/caret/docs/guide.md"
+                    },
+                    "relative_path": {
+                        "description": "현재 문서 위치 기준 경로",
+                        "example": "../images/logo.png"
+                    },
+                    "project_root_path": {
+                        "description": "프로젝트 루트 폴더 기준 경로",
+                        "example": "docs/guide.md"
+                    },
+                    "recommendation": "문서 위치 기준 상대 경로 사용 권장 (이동성 및 가독성 향상)"
+                }
+            },
+            "analysis_guidelines": {
+                "reference_requirements": {
+                    "description": "모든 분석 내용은 반드시 참조 출처 포함",
+                    "types": {
+                        "code_analysis": {
+                            "format": "파일경로:행번호",
+                            "example": "client-plugin/src/main.ts:42-45",
+                            "description": "분석한 파일 경로와 행 번호 명시"
+                        },
+                        "document_analysis": {
+                            "format": "문서경로#섹션",
+                            "example": "/docs/architecture.md#컴포넌트-구조",
+                            "description": "분석한 문서의 경로와 섹션 명시"
+                        },
+                        "web_analysis": {
+                            "format": "[페이지제목](URL) (접근일: YYYY-MM-DD)",
+                            "example": "[VSCode API](https://code.visualstudio.com/api) (접근일: 2025-03-24)",
+                            "description": "참조한 웹페이지 URL과 접근 날짜 기록"
+                        }
+                    }
+                },
+                "verification_requirements": {
+                    "principles": [
+                        "참조 없는 주장 금지",
+                        "검증 불가능한 내용은 반드시 추측임을 명시",
+                        "정보 부족 시 정보 수집 후 분석"
+                    ]
+                }
+            },
+            "hallucination_prevention": {
+                "description": "AI 환각(Hallucination) 방지 원칙",
+                "principles": {
+                    "unverified_information": {
+                        "format": "(추측: 내용) 또는 (미확인: 내용)",
+                        "example": "(추측: 이 함수는 사용자 입력을 검증하는 것으로 보입니다)",
+                        "description": "확인되지 않은 정보는 반드시 '추측' 또는 '미확인'으로 표시"
+                    },
+                    "file_existence_verification": {
+                        "methods": [
+                            "list_dir 또는 read_file 도구로 파일 존재 확인",
+                            "파일 미존재 시 명확히 표시: (파일 없음: 경로)"
+                        ],
+                        "description": "코드나 파일 참조 전 반드시 해당 파일 존재 확인"
+                    },
+                    "speculation_indication": {
+                        "phrases": [
+                            "파일 구조로 보아...",
+                            "코드 패턴으로 추측하면..."
+                        ],
+                        "rule": "결론에 영향을 미치는 추측은 반드시 명시적으로 표현",
+                        "description": "확실하지 않은 분석 내용은 반드시 추측임을 명시"
+                    },
+                    "information_insufficiency": {
+                        "principles": [
+                            "불충분한 정보로 결론 내리지 않기",
+                            "정보 부족 시 추가 정보 요청"
+                        ],
+                        "description": "충분한 정보가 없을 때는 솔직히 인정"
+                    }
+                }
+            }
         }
     },
     "communication_modes": {

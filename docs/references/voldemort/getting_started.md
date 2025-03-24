@@ -1,6 +1,8 @@
 # 볼드모트 IDE 분석 문서
 
 > **중요**: 이 문서들은 볼드모트 IDE의 분석 결과를 정리한 것입니다.
+> 
+> **⚠️ 주의사항**: 이 문서에 포함된 볼드모트 분석 내용은 AI가 분석한 내용으로 할루시네이션이 섞여 있을 수 있으며, 개발자들의 실제 검증이 필요합니다. 특히 9절의 개발 환경 설정 가이드는 실제로 존재하지 않는 정보이므로 참고하지 마세요.
 
 ## 문서 작성 기준
 
@@ -241,6 +243,8 @@
 
 ### 9.1 볼드모트 개발 환경 설정
 
+**⚠️ 주의**: 아래 내용은 실제로 존재하지 않는 정보이며, AI 분석 과정에서 생성된 할루시네이션이 섞여 있습니다. 개발자 검증이 필요합니다.
+
 ```bash
 # 필수 개발 도구 설치
 $ npm install -g yo generator-code vsce
@@ -248,12 +252,6 @@ $ npm install -g yo generator-code vsce
 # 볼드모트 IDE 확장 프로젝트 클론
 $ git clone https://github.com/your-org/voldemort-extension.git
 $ cd voldemort-extension
-
-# 의존성 설치
-$ npm install
-
-# 개발 서버 실행
-$ npm run dev
 ```
 
 #### 9.1.1 개발 환경 설정 로그

@@ -457,6 +457,178 @@
                 "Derive efficiency improvements",
                 "Propose new features"
             ]
+        },
+        "documentation_rules": {
+            "file_references": {
+                "markdown_links": {
+                    "internal_files": {
+                        "format": "[link text](relative/path/to/file.ext)",
+                        "example": "[Installation Guide](../docs/installation.md)",
+                        "description": "Use relative paths based on document location"
+                    },
+                    "web_links": {
+                        "format": "[link text](https://full-url)",
+                        "example": "[GitHub](https://github.com/username/repo)",
+                        "description": "Use full URLs"
+                    }
+                },
+                "path_conventions": {
+                    "absolute_path": {
+                        "description": "Path starting from system root",
+                        "example": "/d:/dev/caret/docs/guide.md"
+                    },
+                    "relative_path": {
+                        "description": "Path relative to current document location",
+                        "example": "../images/logo.png"
+                    },
+                    "project_root_path": {
+                        "description": "Path relative to project root folder",
+                        "example": "/docs/guide.md"
+                    },
+                    "recommendation": "Use relative paths based on document location (improves portability and readability)"
+                }
+            },
+            "analysis_guidelines": {
+                "reference_requirements": {
+                    "description": "All analysis content must include reference sources",
+                    "types": {
+                        "code_analysis": {
+                            "format": "filepath:line-numbers",
+                            "example": "client-plugin/src/main.ts:42-45",
+                            "description": "Specify file path and line numbers of analyzed code"
+                        },
+                        "document_analysis": {
+                            "format": "document-path#section",
+                            "example": "docs/architecture.md#component-structure",
+                            "description": "Specify document path and section analyzed"
+                        },
+                        "web_analysis": {
+                            "format": "[Page Title](URL) (accessed: YYYY-MM-DD)",
+                            "example": "[VSCode API](https://code.visualstudio.com/api) (accessed: 2025-03-24)",
+                            "description": "Record referenced webpage URL and access date"
+                        }
+                    }
+                },
+                "verification_requirements": {
+                    "principles": [
+                        "No claims without references",
+                        "Unverifiable content must be explicitly marked as speculation",
+                        "Collect more information before analysis when information is insufficient"
+                    ]
+                }
+            },
+            "hallucination_prevention": {
+                "description": "Principles to prevent AI hallucinations",
+                "principles": {
+                    "unverified_information": {
+                        "format": "(speculation: content) or (unverified: content)",
+                        "example": "(speculation: This function appears to validate user input)",
+                        "description": "Unverified information must be marked as 'speculation' or 'unverified'"
+                    },
+                    "file_existence_verification": {
+                        "methods": [
+                            "Verify file existence using list_dir or read_file tools",
+                            "Clearly mark when files are missing: (file not found: path)"
+                        ],
+                        "description": "Always verify file existence before referencing code or files"
+                    },
+                    "speculation_indication": {
+                        "phrases": [
+                            "Based on the file structure...",
+                            "Judging from the code pattern..."
+                        ],
+                        "rule": "Speculations that impact conclusions must be explicitly expressed",
+                        "description": "Clearly indicate when analysis content is not certain"
+                    },
+                    "information_insufficiency": {
+                        "principles": [
+                            "Do not draw conclusions from insufficient information",
+                            "Request additional information when needed"
+                        ],
+                        "description": "Honestly acknowledge when information is insufficient"
+                    }
+                }
+            },
+            "document_reference_format": {
+                "description": "Standardized document reference format for consistency across documents",
+                "required_formats": {
+                    "internal_links": {
+                        "format": "absolute path with markdown links",
+                        "pattern": "[description](/path/to/file.ext)",
+                        "example": "[Cline Analysis Report](/docs/references/cline-analysis-report.md)",
+                        "reason": "Ensures all links work correctly regardless of document location"
+                    },
+                    "code_references": {
+                        "format": "linked absolute path with line numbers",
+                        "pattern": "[`/path/to/file.ext:line-range`](/path/to/file.ext)",
+                        "example": "[`/docs/references/cline/src/core/Cline.ts:10-15`](/docs/references/cline/src/core/Cline.ts)",
+                        "reason": "Makes code references both informative and clickable"
+                    },
+                    "section_references": {
+                        "format": "linked path with section anchor",
+                        "pattern": "[description](/path/to/file.md#section)",
+                        "example": "[Configuration Guide](/docs/guide.md#configuration)",
+                        "reason": "Enables direct navigation to specific document sections"
+                    }
+                },
+                "enforcement": {
+                    "priority": "high",
+                    "verification": "During document review, check all references for format compliance",
+                    "correction": "Update non-compliant references to match required formats"
+                }
+            },
+            "hallucination_verification_process": {
+                "description": "Systematic process to verify information and prevent hallucinations",
+                "pre_analysis_checklist": {
+                    "purpose": "Verification steps before starting any analysis",
+                    "steps": [
+                        "Define clear scope boundaries for the analysis",
+                        "Identify and list all primary source documents/code to be referenced",
+                        "Verify actual existence of all source materials before analysis",
+                        "Document any source material that is missing or inaccessible"
+                    ]
+                },
+                "during_analysis_protocol": {
+                    "purpose": "Active verification during analysis work",
+                    "requirements": [
+                        "Each factual claim must be linked to specific source line or section",
+                        "Track certainty level for each conclusion (confirmed, likely, speculative)",
+                        "Maintain separation between direct observations and derived conclusions",
+                        "Regularly review previous conclusions against new findings"
+                    ]
+                },
+                "verification_markers": {
+                    "confirmed": {
+                        "syntax": "✓ (confirmed: statement)",
+                        "when_to_use": "Directly verified in source code/documents",
+                        "example": "✓ (confirmed: The Cline project uses TypeScript)"
+                    },
+                    "unconfirmed": {
+                        "syntax": "? (unconfirmed: statement)",
+                        "when_to_use": "Mentioned but not directly verified",
+                        "example": "? (unconfirmed: Error recovery may use a checkpoint system)"
+                    },
+                    "speculative": {
+                        "syntax": "~ (speculative: statement)",
+                        "when_to_use": "Reasonable inference without direct evidence",
+                        "example": "~ (speculative: The architecture appears to follow MVC pattern)"
+                    }
+                },
+                "examples_of_hallucinations": {
+                    "description": "Common hallucinations encountered in previous analyses",
+                    "instances": [
+                        "Nonexistent 'prompt hacking technique' in Voldemort",
+                        "Unverified 'error auto-recovery' feature",
+                        "Unconfirmed 'code type error auto-correction'",
+                        "Imagined 'hidden advanced debugging tools'"
+                    ],
+                    "prevention_tips": [
+                        "Be especially cautious with 'advanced' or 'special' feature claims",
+                        "Verify all technical capabilities with actual code references",
+                        "When documentation mentions a feature, verify it exists in code"
+                    ]
+                }
+            }
         }
     },
     "metadata": {

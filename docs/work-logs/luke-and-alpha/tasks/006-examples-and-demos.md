@@ -1,12 +1,27 @@
-# 태스크 006: ollama 기반 미니 텍스트 편집 데모
+# 태스크 #006: ollama 기반 미니 텍스트 편집 데모
+
+**상태**: 취소됨 - Cline 프로젝트로 전환됨
 
 ## 태스크 정보
 - 생성일: 2025-03-23
 - 완료일: 
 
 ## 태스크 목적
-ollama API를 활용한 가장 기본적인 텍스트 편집 기능 데모를 구현하여 개념 증명(PoC) 수준의 결과물 제작
+ollama API를 활용한 가장 기본적인 텍스트 편집 기능 데모를 구현하는 것이 목적이었으나, 이후 분석 결과를 바탕으로 Cline 프로젝트에 기여하는 방향으로 전환되어 취소되었습니다.
 
+## 취소 사유
+- Cline 프로젝트가 이미 동일한 기능을 구현하고 있으며 성숙도가 높음
+- 리소스를 효율적으로 활용하기 위해 독자 개발보다 기여 형태가 효과적임
+- 태스크 #008(Cline 프로젝트 분석)에서 도출된 전략적 방향성에 따른 결정
+
+## 대체 태스크
+- [Cline Ollama 통합 최적화 기여](/docs/references/cline-quick-contribution-tasks.md#2-ollama-통합-최적화-2-3주)
+
+## 참조 문서
+- [Cline 프로젝트 분석 보고서](/docs/references/cline-analysis-report.md)
+- [Cline 프로젝트 전환 계획](/docs/transition-to-cline.md)
+
+---
 ## 수행 단계
 1. [ ] ollama API 기본 연동
    - 텍스트 요청 기본 API 호출 구현

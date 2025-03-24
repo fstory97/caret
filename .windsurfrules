@@ -130,18 +130,36 @@
                     "Push to remote with 'git push' upon command"
                 ],
                 "commit_message_format": {
-                    "title": "[type]: 태스크 #[task-number] [description]",
+                    "title": "type: 태스크 #[task-number] [description]",
+                    "title_format_details": {
+                        "type_options": ["feat", "fix", "docs", "style", "refactor", "test", "chore"],
+                        "type_descriptions": {
+                            "feat": "새로운 기능 추가",
+                            "fix": "버그 수정",
+                            "docs": "문서 관련 변경",
+                            "style": "코드 형식, 세미콜론 등 스타일 변경",
+                            "refactor": "코드 리팩토링",
+                            "test": "테스트 코드 추가/수정",
+                            "chore": "빌드 프로세스, 라이브러리 변경 등"
+                        },
+                        "usage_note": "모든 태스크 참조는 #000 형식으로 통일"
+                    },
                     "body_format": {
-                        "per_task_section": "[type]: [description] (#[task-number])",
+                        "per_task_section": "type: [description] (#[task-number])",
                         "file_changes": [
-                            "- A: [path/to/added/file.ext] (Added files)",
-                            "- U: [path/to/updated/file.ext] (Updated files)", 
-                            "- D: [path/to/deleted/file.ext] (Deleted files)"
+                            "- A: [path/to/added/file.ext] (Added - 추가된 파일)",
+                            "- U: [path/to/updated/file.ext] (Updated - 수정된 파일)", 
+                            "- D: [path/to/deleted/file.ext] (Deleted - 삭제된 파일)"
+                        ],
+                        "file_listing_order": [
+                            "1. 추가된 파일(A) 먼저 알파벳 순으로",
+                            "2. 수정된 파일(U) 알파벳 순으로", 
+                            "3. 삭제된 파일(D) 알파벳 순으로"
                         ]
                     },
                     "examples": [
                         "docs: 태스크 #003 오픈소스 프로젝트 문서 작성 완료",
-                        "feat: 모드 전환 컨텍스트 관리 규칙 추가 (#001)\n- A: agents-rules/alpha/project-rules.json\n- U: docs/work-logs/luke-and-alpha/2025-03-23.md"
+                        "feat: 태스크 #001 모드 전환 컨텍스트 관리 규칙 추가\n\n- A: agents-rules/alpha/project-rules.json (규칙 파일 추가)\n- U: docs/work-logs/luke-and-alpha/2025-03-23.md (작업 로그 업데이트)"
                     ]
                 },
                 "security_warnings": [
@@ -251,6 +269,30 @@
                 "switching": "New task requires new chat session",
                 "continuation": "Can continue previous task in new session"
             },
+            "task_planning": {
+                "scope_definition": {
+                    "principles": [
+                        "One task covers only a single topic/purpose",
+                        "If multiple topics are mixed, separate from the beginning",
+                        "Work creating different outputs should be planned as separate tasks"
+                    ],
+                    "size_guidelines": {
+                        "small": "Single task completable within 1-2 hours",
+                        "medium": "Related tasks completable within half a day",
+                        "large": "Tasks spanning more than a day are prohibited in principle"
+                    }
+                },
+                "validation_checklist": {
+                    "priority": "highest",
+                    "pre_task_creation": [
+                        "Is the task topic singular?",
+                        "Is the output clearly defined as one deliverable?",
+                        "Can the task be performed independently of other tasks?",
+                        "Can it be completed within a day?",
+                        "Is it free from mixed domains/topics?"
+                    ]
+                }
+            },
             "task_progress": {
                 "checklist_principle": "One checklist item per work session",
                 "verification": "Each checklist item must be verified before marking as complete",
@@ -318,7 +360,7 @@
             },
             "current_task_indication": {
                 "description": "Clear indication of active task in daily work log",
-                "required_format": "**현재 활성 태스크**: #00X - [태스크명]",
+                "required_format": "**Current Active Task**: #00X - [Task Name]",
                 "placement": "Top of daily work log, after date",
                 "priority": "highest",
                 "update_frequency": "Whenever active task changes"
@@ -348,21 +390,21 @@
             },
             "daily_log": {
                 "sections": [
-                    "현재 활성 태스크",
-                    "오늘의 작업 계획",
-                    "진행 상황",
-                    "메모",
-                    "다음 단계"
+                    "Current Active Task",
+                    "Today's Work Plan",
+                    "Progress",
+                    "Notes",
+                    "Next Steps"
                 ]
             },
             "task_log": {
                 "sections": [
-                    "태스크 정보",
-                    "태스크 목적",
-                    "수행 단계",
-                    "참고 자료",
-                    "진행 상황",
-                    "메모"
+                    "Task Information",
+                    "Task Purpose",
+                    "Execution Steps",
+                    "Reference Materials",
+                    "Progress Status",
+                    "Notes"
                 ]
             }
         },
@@ -384,6 +426,29 @@
                 "alpha_centered": "Rules exist to serve Alpha, not constrain Alpha",
                 "self_reflection": "When rules fail, focus on improving the rules rather than blaming Alpha",
                 "continuous_adaptation": "Rules should evolve based on actual usage patterns and failures"
+            },
+            "rule_editing_guidelines": {
+                "before_editing": [
+                    "Before editing rules, always refer to docs/rule-editing-guide.md",
+                    "Update both English rules (project-rules.json) and Korean rules (project-rules.ko.json) simultaneously",
+                    "Also update Markdown format (project-rules.md) for human readability"
+                ],
+                "editing_process": [
+                    "1. First edit project-rules.md in Korean and get Master's approval",
+                    "2. Once approved, create/update project-rules.ko.json (Korean JSON)",
+                    "3. Finally, create/update project-rules.json (English JSON)",
+                    "4. JSON files are difficult for Master to review, always use Markdown for reviews"
+                ],
+                "validation_steps": [
+                    "Validate JSON structure when changing rule structure",
+                    "Create backup before deleting important sections", 
+                    "Test agent behavior after changes"
+                ],
+                "file_structure": {
+                    "project-rules.json": "English main rules file (actually applied)",
+                    "project-rules.ko.json": "Korean rules file (for reference)",
+                    "project-rules.md": "Markdown format in Korean (manually maintained, for human readability)"
+                }
             }
         },
         "self_learning": {
@@ -392,6 +457,178 @@
                 "Derive efficiency improvements",
                 "Propose new features"
             ]
+        },
+        "documentation_rules": {
+            "file_references": {
+                "markdown_links": {
+                    "internal_files": {
+                        "format": "[link text](relative/path/to/file.ext)",
+                        "example": "[Installation Guide](../docs/installation.md)",
+                        "description": "Use relative paths based on document location"
+                    },
+                    "web_links": {
+                        "format": "[link text](https://full-url)",
+                        "example": "[GitHub](https://github.com/username/repo)",
+                        "description": "Use full URLs"
+                    }
+                },
+                "path_conventions": {
+                    "absolute_path": {
+                        "description": "Path starting from system root",
+                        "example": "/d:/dev/caret/docs/guide.md"
+                    },
+                    "relative_path": {
+                        "description": "Path relative to current document location",
+                        "example": "../images/logo.png"
+                    },
+                    "project_root_path": {
+                        "description": "Path relative to project root folder",
+                        "example": "/docs/guide.md"
+                    },
+                    "recommendation": "Use relative paths based on document location (improves portability and readability)"
+                }
+            },
+            "analysis_guidelines": {
+                "reference_requirements": {
+                    "description": "All analysis content must include reference sources",
+                    "types": {
+                        "code_analysis": {
+                            "format": "filepath:line-numbers",
+                            "example": "client-plugin/src/main.ts:42-45",
+                            "description": "Specify file path and line numbers of analyzed code"
+                        },
+                        "document_analysis": {
+                            "format": "document-path#section",
+                            "example": "docs/architecture.md#component-structure",
+                            "description": "Specify document path and section analyzed"
+                        },
+                        "web_analysis": {
+                            "format": "[Page Title](URL) (accessed: YYYY-MM-DD)",
+                            "example": "[VSCode API](https://code.visualstudio.com/api) (accessed: 2025-03-24)",
+                            "description": "Record referenced webpage URL and access date"
+                        }
+                    }
+                },
+                "verification_requirements": {
+                    "principles": [
+                        "No claims without references",
+                        "Unverifiable content must be explicitly marked as speculation",
+                        "Collect more information before analysis when information is insufficient"
+                    ]
+                }
+            },
+            "hallucination_prevention": {
+                "description": "Principles to prevent AI hallucinations",
+                "principles": {
+                    "unverified_information": {
+                        "format": "(speculation: content) or (unverified: content)",
+                        "example": "(speculation: This function appears to validate user input)",
+                        "description": "Unverified information must be marked as 'speculation' or 'unverified'"
+                    },
+                    "file_existence_verification": {
+                        "methods": [
+                            "Verify file existence using list_dir or read_file tools",
+                            "Clearly mark when files are missing: (file not found: path)"
+                        ],
+                        "description": "Always verify file existence before referencing code or files"
+                    },
+                    "speculation_indication": {
+                        "phrases": [
+                            "Based on the file structure...",
+                            "Judging from the code pattern..."
+                        ],
+                        "rule": "Speculations that impact conclusions must be explicitly expressed",
+                        "description": "Clearly indicate when analysis content is not certain"
+                    },
+                    "information_insufficiency": {
+                        "principles": [
+                            "Do not draw conclusions from insufficient information",
+                            "Request additional information when needed"
+                        ],
+                        "description": "Honestly acknowledge when information is insufficient"
+                    }
+                }
+            },
+            "document_reference_format": {
+                "description": "Standardized document reference format for consistency across documents",
+                "required_formats": {
+                    "internal_links": {
+                        "format": "absolute path with markdown links",
+                        "pattern": "[description](/path/to/file.ext)",
+                        "example": "[Cline Analysis Report](/docs/references/cline-analysis-report.md)",
+                        "reason": "Ensures all links work correctly regardless of document location"
+                    },
+                    "code_references": {
+                        "format": "linked absolute path with line numbers",
+                        "pattern": "[`/path/to/file.ext:line-range`](/path/to/file.ext)",
+                        "example": "[`/docs/references/cline/src/core/Cline.ts:10-15`](/docs/references/cline/src/core/Cline.ts)",
+                        "reason": "Makes code references both informative and clickable"
+                    },
+                    "section_references": {
+                        "format": "linked path with section anchor",
+                        "pattern": "[description](/path/to/file.md#section)",
+                        "example": "[Configuration Guide](/docs/guide.md#configuration)",
+                        "reason": "Enables direct navigation to specific document sections"
+                    }
+                },
+                "enforcement": {
+                    "priority": "high",
+                    "verification": "During document review, check all references for format compliance",
+                    "correction": "Update non-compliant references to match required formats"
+                }
+            },
+            "hallucination_verification_process": {
+                "description": "Systematic process to verify information and prevent hallucinations",
+                "pre_analysis_checklist": {
+                    "purpose": "Verification steps before starting any analysis",
+                    "steps": [
+                        "Define clear scope boundaries for the analysis",
+                        "Identify and list all primary source documents/code to be referenced",
+                        "Verify actual existence of all source materials before analysis",
+                        "Document any source material that is missing or inaccessible"
+                    ]
+                },
+                "during_analysis_protocol": {
+                    "purpose": "Active verification during analysis work",
+                    "requirements": [
+                        "Each factual claim must be linked to specific source line or section",
+                        "Track certainty level for each conclusion (confirmed, likely, speculative)",
+                        "Maintain separation between direct observations and derived conclusions",
+                        "Regularly review previous conclusions against new findings"
+                    ]
+                },
+                "verification_markers": {
+                    "confirmed": {
+                        "syntax": "✓ (confirmed: statement)",
+                        "when_to_use": "Directly verified in source code/documents",
+                        "example": "✓ (confirmed: The Cline project uses TypeScript)"
+                    },
+                    "unconfirmed": {
+                        "syntax": "? (unconfirmed: statement)",
+                        "when_to_use": "Mentioned but not directly verified",
+                        "example": "? (unconfirmed: Error recovery may use a checkpoint system)"
+                    },
+                    "speculative": {
+                        "syntax": "~ (speculative: statement)",
+                        "when_to_use": "Reasonable inference without direct evidence",
+                        "example": "~ (speculative: The architecture appears to follow MVC pattern)"
+                    }
+                },
+                "examples_of_hallucinations": {
+                    "description": "Common hallucinations encountered in previous analyses",
+                    "instances": [
+                        "Nonexistent 'prompt hacking technique' in Voldemort",
+                        "Unverified 'error auto-recovery' feature",
+                        "Unconfirmed 'code type error auto-correction'",
+                        "Imagined 'hidden advanced debugging tools'"
+                    ],
+                    "prevention_tips": [
+                        "Be especially cautious with 'advanced' or 'special' feature claims",
+                        "Verify all technical capabilities with actual code references",
+                        "When documentation mentions a feature, verify it exists in code"
+                    ]
+                }
+            }
         }
     },
     "metadata": {
