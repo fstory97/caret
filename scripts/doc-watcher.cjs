@@ -4,6 +4,35 @@ const fs = require('fs');
 const path = require('path');
 const chokidar = require('chokidar');
 
+// .env 파일 로드 함수
+function loadEnvFile() {
+  try {
+    const envPath = path.resolve(process.cwd(), '.env');
+    if (fs.existsSync(envPath)) {
+      const envContent = fs.readFileSync(envPath, 'utf8');
+      const envVars = {};
+      
+      envContent.split('\n').forEach(line => {
+        // 주석이나 빈 줄 무시
+        if (!line || line.startsWith('#')) return;
+        
+        const [key, ...valueParts] = line.split('=');
+        if (key && valueParts.length > 0) {
+          const value = valueParts.join('=').trim();
+          // 따옴표 제거
+          envVars[key.trim()] = value.replace(/^["']|["']$/g, '');
+        }
+      });
+      
+      return envVars;
+    }
+  } catch (error) {
+    console.error(`Error loading .env file: ${error.message}`);
+  }
+  
+  return {};
+}
+
 // CLI 옵션 처리
 const args = process.argv.slice(2);
 if (args.includes('-h') || args.includes('--help')) {
@@ -75,8 +104,17 @@ function formatTokenInfo(tokens) {
   return `📊 Current size: ${tokens.toLocaleString()} tokens (${percentage}% / ${maxTokens.toLocaleString()})${warning}`;
 }
 
-// 감시할 영문 문서 파일
-const rulesFile = './agents-rules/alpha/project-rules.json';
+// 환경 변수 로드
+const envVars = loadEnvFile();
+
+// 감시할 규칙 파일 경로 설정 (.env에서 가져오거나 기본값 사용)
+const rulesFile = envVars.RULES_FILE || './agents-rules/alpha/project-rules.json';
+const targetCursorRules = envVars.CURSOR_RULES_FILE || '.cursorrules';
+const targetWindsurfRules = envVars.WINDSURF_RULES_FILE || '.windsurfrules';
+
+log(`Using rules file: ${rulesFile}`, 'debug');
+log(`Target Cursor rules: ${targetCursorRules}`, 'debug');
+log(`Target Windsurf rules: ${targetWindsurfRules}`, 'debug');
 
 // 규칙 파일 업데이트
 function updateRules() {
@@ -85,10 +123,13 @@ function updateRules() {
       const content = fs.readFileSync(rulesFile, 'utf8');
       const tokens = estimateTokens(content);
       
-      fs.writeFileSync('.windsurfrules', content);
-      fs.writeFileSync('.cursorrules', content);
+      fs.writeFileSync(targetWindsurfRules, content);
+      fs.writeFileSync(targetCursorRules, content);
       
       log(`Rules updated: ${formatTokenInfo(tokens)}`);
+      log(`Updated rules in ${targetWindsurfRules} and ${targetCursorRules}`);
+    } else {
+      log(`Rules file not found: ${rulesFile}`, 'error');
     }
   } catch (error) {
     log(`Error updating rules: ${error.message}`, 'error');
@@ -119,4 +160,4 @@ process.on('SIGINT', () => {
 log(`Rules watcher started (${new Date().toLocaleString()})`);
 log('Press Ctrl+C to exit');
 
-log('doc-watcher.cjs v1.3.0', 'debug');
+log('doc-watcher.cjs v1.4.0', 'debug');

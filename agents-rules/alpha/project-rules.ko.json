@@ -130,18 +130,36 @@
                     "명령 시 'git push'로 원격 저장소에 푸시"
                 ],
                 "commit_message_format": {
-                    "title": "[타입]: 태스크 #[태스크번호] [설명]",
+                    "title": "type: 태스크 #[태스크번호] [설명]",
+                    "title_format_details": {
+                        "type_options": ["feat", "fix", "docs", "style", "refactor", "test", "chore"],
+                        "type_descriptions": {
+                            "feat": "새로운 기능 추가",
+                            "fix": "버그 수정",
+                            "docs": "문서 관련 변경",
+                            "style": "코드 형식, 세미콜론 등 스타일 변경",
+                            "refactor": "코드 리팩토링",
+                            "test": "테스트 코드 추가/수정",
+                            "chore": "빌드 프로세스, 라이브러리 변경 등"
+                        },
+                        "usage_note": "모든 태스크 참조는 #000 형식으로 통일"
+                    },
                     "body_format": {
-                        "per_task_section": "[타입]: [설명] (#[태스크번호])",
+                        "per_task_section": "type: [설명] (#[태스크번호])",
                         "file_changes": [
-                            "- A: [추가된/파일/경로.확장자] (추가된 파일)",
-                            "- U: [수정된/파일/경로.확장자] (수정된 파일)", 
-                            "- D: [삭제된/파일/경로.확장자] (삭제된 파일)"
+                            "- A: [추가된/파일/경로.확장자] (Added - 추가된 파일)",
+                            "- U: [수정된/파일/경로.확장자] (Updated - 수정된 파일)", 
+                            "- D: [삭제된/파일/경로.확장자] (Deleted - 삭제된 파일)"
+                        ],
+                        "file_listing_order": [
+                            "1. 추가된 파일(A) 먼저 알파벳 순으로",
+                            "2. 수정된 파일(U) 알파벳 순으로", 
+                            "3. 삭제된 파일(D) 알파벳 순으로"
                         ]
                     },
                     "examples": [
                         "docs: 태스크 #003 오픈소스 프로젝트 문서 작성 완료",
-                        "feat: 모드 전환 컨텍스트 관리 규칙 추가 (#001)\n- A: agents-rules/alpha/project-rules.json\n- U: docs/work-logs/luke-and-alpha/2025-03-23.md"
+                        "feat: 태스크 #001 모드 전환 컨텍스트 관리 규칙 추가\n\n- A: agents-rules/alpha/project-rules.json (규칙 파일 추가)\n- U: docs/work-logs/luke-and-alpha/2025-03-23.md (작업 로그 업데이트)"
                     ]
                 },
                 "security_warnings": [
@@ -211,9 +229,9 @@
     },
     "work_process": {
         "daily_routine": {
-            "start": "Create daily work log",
-            "planning": "Discuss tasks with Master",
-            "recording": "Update work progress in real-time",
+            "start": "일간 작업 로그 생성",
+            "planning": "마스터와 업무 논의",
+            "recording": "실시간 진행 상황 기록",
             "active_task_display": "현재 활성 태스크를 일일 작업 일지 상단에 표시"
         },
         "information_exploration": {
@@ -245,11 +263,35 @@
             }
         },
         "task_management": {
-            "unit": "One session (chat)",
+            "unit": "하나의 세션 (채팅)",
             "session_rules": {
                 "focus": "세션당 하나의 태스크",
                 "switching": "새 태스크는 새 채팅 세션 필요",
                 "continuation": "새 세션에서 이전 태스크 계속 가능"
+            },
+            "task_planning": {
+                "scope_definition": {
+                    "principles": [
+                        "하나의 태스크는 단일 주제/목적만 다룸",
+                        "여러 주제가 섞인 경우 처음부터 분리",
+                        "서로 다른 결과물을 만드는 작업은 별개 태스크로 계획"
+                    ],
+                    "size_guidelines": {
+                        "small": "1-2시간 내 완료 가능한 단일 작업",
+                        "medium": "반나절 내 완료 가능한 연관 작업들",
+                        "large": "하루를 넘기는 태스크는 원칙적으로 금지"
+                    }
+                },
+                "validation_checklist": {
+                    "priority": "highest",
+                    "pre_task_creation": [
+                        "태스크의 주제가 단일한가?",
+                        "결과물이 명확히 하나인가?",
+                        "다른 태스크와 독립적으로 수행 가능한가?",
+                        "하루 내에 완료 가능한가?",
+                        "여러 도메인/주제가 섞여 있지 않은가?"
+                    ]
+                }
             },
             "task_progress": {
                 "checklist_principle": "작업 세션당 체크리스트 항목 하나 완료",
@@ -384,6 +426,29 @@
                 "alpha_centered": "규칙은 알파를 위해 존재하는 것이지, 알파를 제약하기 위한 것이 아님",
                 "self_reflection": "규칙이 실패할 때는 알파를 탓하기보다 규칙 자체를 개선하는 데 집중",
                 "continuous_adaptation": "규칙은 실제 사용 패턴과 실패 사례를 기반으로 지속적으로 발전해야 함"
+            },
+            "rule_editing_guidelines": {
+                "before_editing": [
+                    "규칙 편집 전 반드시 docs/rule-editing-guide.md 문서 참조",
+                    "영어 규칙(project-rules.json)과 한국어 규칙(project-rules.ko.json) 동시 업데이트",
+                    "사람이 읽기 쉽도록 마크다운 형식(project-rules.md)도 함께 업데이트"
+                ],
+                "editing_process": [
+                    "1. 먼저 한글로 project-rules.md 마크다운 파일을 수정하고 마스터 승인 받기",
+                    "2. 승인 후 project-rules.ko.json (한글 JSON) 파일 생성/업데이트",
+                    "3. 마지막으로 project-rules.json (영어 JSON) 파일 생성/업데이트",
+                    "4. JSON 파일은 마스터가 검토하기 어려우므로 항상 마크다운으로 검토 받기"
+                ],
+                "validation_steps": [
+                    "규칙 구조 변경 시 JSON 유효성 검증",
+                    "중요 섹션 삭제 전 백업 생성", 
+                    "변경 후 에이전트 동작 테스트"
+                ],
+                "file_structure": {
+                    "project-rules.json": "영문 메인 규칙 파일 (실제 적용됨)",
+                    "project-rules.ko.json": "한국어 규칙 파일 (참조용)",
+                    "project-rules.md": "한글로 된 마크다운 형식 (수동 관리, 사람이 읽기 쉬운 형식)"
+                }
             }
         },
         "self_learning": {
