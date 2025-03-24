@@ -561,7 +561,7 @@
                     "code_references": {
                         "format": "linked absolute path with line numbers",
                         "pattern": "[`/path/to/file.ext:line-range`](/path/to/file.ext)",
-                        "example": "[`/docs/references/cline/src/core/Cline.ts:10-15`](/docs/references/cline/src/core/Cline.ts)",
+                        "example": "[`https://github.com/cline/cline/src/core/Cline.ts:10-15`](https://github.com/cline/cline/src/core/Cline.ts)",
                         "reason": "Makes code references both informative and clickable"
                     },
                     "section_references": {
